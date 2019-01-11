@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>question_list</title>
+        <style type="text/css">
+        	p {
+        		margin: 10 px;
+        		padding: 10 px;
+        	}
+        </style>
+    </head>
+
+	<body>
+		<h1>{{ question.question_text }}</h1>
+
+		<ul>
+		{% for choice in question.choice_set.all %}
+		    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes.pluralize }}</li>
+		{% endfor %}
+		</ul>
+
+		<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+		<a href="{% url 'polls:index'%}">Home</a>
+		<div style="text-align:center;">
+		<h1>投票管理</h1>
+		<form action="{% url 'polls:clearvote' question.id %}" method="post">
+			{% csrf_token %}
+			{% for choice in question.choice_set.all%}
+				<input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+				<label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br/>
+			{% endfor %}
+			<input type="submit" name="Vote" value="清空投票">
+		</form></div>
+	</body>
+</html>
