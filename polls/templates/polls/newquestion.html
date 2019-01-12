@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>question_detail</title>	
+        <meta name="save" content="history">  
+		<style type="text/css">  
+			input{behavior:url(#default#savehistory)};  
+		</style> 
+    </head>
+
+	<body>
+
+		<fieldset>
+			<legend>
+				新建问题
+			</legend>
+
+			<div>
+				<form action="{% url 'polls:addquestion' %}" method="post" onsubmit="return check()" >
+					{% csrf_token %}
+				 	question: <input type="text"  id="question" name="question" onchange="checkquestion()"/><span id="checktext1"></span>
+				 	time: <input type="date"  id="currenttime" name="currenttime" onchange="checkdate()"/><span id="checktext2"></span>
+				 	<div id="div">
+				 		<input type="button"  value="增加选项" onclick="addText()"/><span id="checktext3"></span>
+	        			<div>选项1:<input type='text' name = 'choicevalues'> <input type='button' value='删除' onclick='deleteText(this)'></div>
+	    			</div>
+				 	<input type="submit" value="提交" />
+				</form>
+			</div>
+		</fieldset>
+
+		<script type="text/javascript">
+			var num = 2
+		    function addText(){
+		        var div = document.getElementById("div");
+		        div.innerHTML += "<div>选项"+ num +":<input type='text' name = 'choicevalues' onchange='checkchoice()'/> <input type='button' value='删除' onclick='deleteText(this)'></div>";
+		        num ++;
+		    }
+		    function deleteText(This){
+		        //获取删除按钮的父元素 的 父元素 利用 爷爷元素 删除
+		        This.parentNode.parentNode.removeChild(This.parentNode);
+		    }
+		</script>
+
+
+
+		<script type="text/javascript">
+
+			function checkquestion() {
+				var check = false;
+				var question = document.getElementById("question").value;
+				if (question.length <= 0) {
+					document.getElementById("checktext1").innerHTML = "  × 不能为空";
+					check = false;
+				}else if(question.length >200) 
+				{
+					document.getElementById("checktext1").innerHTML = "  × 不要多于10位";
+					check = false;
+				}
+				else {
+					document.getElementById("checktext1").innerHTML = "  √";
+					check = true;
+				}
+				return check;
+			}
+
+			function checkdate() {
+				var check = false;
+				var currenttime = document.getElementById("currenttime").value;
+				if (currenttime.length <= 0) {
+					document.getElementById("checktext2").innerHTML = "  × 不能为空";
+					check = false;
+				} else {
+					document.getElementById("checktext2").innerHTML = "  √";
+					check = true;
+				}
+				return check;
+			}
+
+			function check() {
+				var check =  checkquestion() && checkdate();
+				return check;
+			 
+			}
+
+		</script>
+
+
+		<script type="text/javascript">
+
+
+		</script>
+
+
+	</body>
+</html>
+
+
+
+
+
