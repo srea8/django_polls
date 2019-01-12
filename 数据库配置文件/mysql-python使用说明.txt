@@ -3,3 +3,23 @@
 
 2.使用pip来安装提示如下错误：_mysql.c(42) : fatal error C1083: Cannot open include file: 'config-win.h': No such file or directory
 需要安装文件夹中的插件
+
+3.fatal error C1083: Cannot open include file: 'config-win.h': No such file or directory
+需要安装mysql connector, 可根据系统版本选择安装32位或64位的， 
+下载地址：https://dev.mysql.com/downloads/connector/python/
+或者在https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python下载后
+直接安装pip install mysql_python-1.2.5-cp27-none-win_amd64.whl
+
+4.编码错误：pip安装报错：UnicodeDecodeError: 'ascii' codec can't decode byte 0xc9 in position 7: ordinal not in range(128)
+python27\Lib\mimetypes.py文件import下加上
+if sys.getdefaultencoding() != 'gbk': 
+ reload(sys) 
+ sys.setdefaultencoding('gbk')
+
+
+5.编码错误：pip安装报错：UnicodeDecodeError: 'utf8' codec can't decode byte 0xcd in position 9: invalid continuation byte
+在python27\lib\site-packages下新建文件sitecustomize.py
+写上
+import sys 
+reload(sys)
+sys.setdefaultencoding('gbk')
