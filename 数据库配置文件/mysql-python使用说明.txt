@@ -1,0 +1,2 @@
+   error: Microsoft Visual C++ 9.0 is required. Get it from http://aka.ms/vcpython27
+报错需要安装这个插件
