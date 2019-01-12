@@ -14,7 +14,7 @@
 
 	<body>
 		<h1> 问卷调查 </h1>
-		<a href="{% url 'polls:index'%}">新建问题</a>
+		<a href="{% url 'polls:newquestion'%}">新建问题</a>
 		<a href="{% url 'polls:index'%}">管理问题</a>
 		{% if latest_question_list %}
 		    <ul >

@@ -13,4 +13,6 @@ urlpatterns = [
 	url(r'^(?P<pk>[0-9]+)/results/$', views.ResultsView.as_view(),name='results'),
 	url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote,name='vote'),
 	url(r'^(?P<question_id>[0-9]+)/clearvote/$', views.clearvote,name='clearvote'),
+	url(r'^newquestion/$', views.newquestion, name='newquestion'),
+	url(r'^addquestion/$', views.addquestion, name='addquestion'),
 ]

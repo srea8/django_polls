@@ -83,3 +83,28 @@ def clearvote(request, question_id):
 		selected_choice.save()
 
 	return HttpResponseRedirect(reverse('polls:results',args=(question.id,)))
+
+def newquestion(request):
+	"""docstring for DetailView"""
+	return render(request, "polls/newquestion.html", {})
+
+def addquestion(request):
+	if request.method == 'POST':
+		addquestion=request.POST.get("question",None)
+		currenttime=request.POST.get("currenttime",None)
+		choicevalues = request.POST.getlist("choicevalues",None)
+		if addquestion!=None and currenttime!=None:
+			newquestion = Question()
+			newquestion.question_text = addquestion
+			newquestion.pubdate = currenttime
+			newquestion.save()
+			A = Question.objects.get(question_text=newquestion)
+			for choicevalue in choicevalues:
+				choices = Choice()
+				choices.question=A
+				choices.choice_text = choicevalue
+				choices.votes = 0
+				choices.save()
+
+		return HttpResponseRedirect(reverse('polls:index',args=()))
+	return HttpResponseRedirect(reverse('polls:newquestion',args=()))
