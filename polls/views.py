@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views import generic
 # from django.template import loader
 
-from .models import Question,Choice
+from .models import Question,Choice,Questionnaire
 # Create your views here.
 
 
@@ -108,3 +108,16 @@ def addquestion(request):
 
 		return HttpResponseRedirect(reverse('polls:index',args=()))
 	return HttpResponseRedirect(reverse('polls:newquestion',args=()))
+
+
+class QuestionnaireView(generic.ListView):
+	template_name = 'polls/listquestionnaire.html'
+	context_object_name = "questionnaire_list"
+	def get_queryset(self):
+		return Questionnaire.objects.all()
+
+
+class QuestionnaireDetailView(generic.DetailView):
+	"""docstring for DetailView"""
+	model = Questionnaire
+	template_name = 'polls/questiondetail.html'

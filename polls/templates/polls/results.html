@@ -14,7 +14,7 @@
 	<body>
 		<h1>{{ question.question_text }}</h1>
 
-		<ul>
+		<ul style="padding:0">
 		{% for choice in question.choice_set.all %}
 		    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes.pluralize }}</li>
 		{% endfor %}

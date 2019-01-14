@@ -24,3 +24,13 @@ class Choice(models.Model):
 	def __unicode__(self):
 		return self.choice_text
 
+class Questionnaire(models.Model):
+	questionnaire_text = models.CharField(max_length=200)
+	members = models.ManyToManyField(Question)
+	pubdate = models.DateField('date published')
+
+	def was_published_recently(self):
+		return self.pubdate>=timezone.now()-datetime.timedelta(days=1)
+
+	def __unicode__(self):
+		return self.questionnaire_text

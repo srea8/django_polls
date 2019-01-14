@@ -15,4 +15,6 @@ urlpatterns = [
 	url(r'^(?P<question_id>[0-9]+)/clearvote/$', views.clearvote,name='clearvote'),
 	url(r'^newquestion/$', views.newquestion, name='newquestion'),
 	url(r'^addquestion/$', views.addquestion, name='addquestion'),
+	url(r'^listquestionnaire/$', views.QuestionnaireView.as_view(), name='listquestionnaire'),
+	url(r'^(?P<pk>[0-9]+)/questiondetail/$', views.QuestionnaireDetailView.as_view(), name='questiondetail'),
 ]

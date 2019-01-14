@@ -5,6 +5,9 @@
         <title>question_list</title>
         <style type="text/css">
 
+        input {
+        	margin:0 px;padding:0;
+        }
 		ol {
 		margin:0 px;padding:0;
 		}
@@ -19,8 +22,10 @@
 		{% if latest_question_list %}
 		    <ul >
 		    {% for question in latest_question_list %}
-		        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-				<ol type="A">
+		    	<ol>
+		    	<input type="checkbox" name="question_select" value="{{question.id}}" />
+		    	<a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></ol>
+				<ol type="A" style="padding-left : 30px">
 					{% for choice in question.choice_set.all%}
 						<li><label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br/></li>
 					{% endfor %}
