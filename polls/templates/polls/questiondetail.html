@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>question_detail</title>	
+    </head>
+
+	<body>
+		<h1> 问卷{{questionnaire.pk}} -- {{questionnaire.questionnaire_text}}</h1>
+		<a href="{% url 'polls:index'%}">Home</a><br/>
+
+			{%for question in questionnaire.members.all%}  
+		    	{{question.id}}.{{question}}<br/>
+		    	{% for choice in question.choice_set.all%}
+					<input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+					<label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br/>
+				{% endfor %}
+		    {%endfor%} 
+		    <input type="submit" name="Vote">
+	</body>
+</html>
