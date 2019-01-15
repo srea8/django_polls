@@ -8,14 +8,18 @@
 	<body>
 		<h1> 问卷{{questionnaire.pk}} -- {{questionnaire.questionnaire_text}}</h1>
 		<a href="{% url 'polls:index'%}">Home</a><br/>
+		{% if error_message %} <p><strong>{{error_message}}</strong></p>{% endif %}
 
 			{%for question in questionnaire.members.all%}  
+		    	<form action="{% url 'polls:questionnairevote' questionnaire.id %}" method="post">
 		    	{{question.id}}.{{question}}<br/>
+				{% csrf_token %}
 		    	{% for choice in question.choice_set.all%}
-					<input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+					<input type="checkbox" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
 					<label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br/>
-				{% endfor %}
-		    {%endfor%} 
-		    <input type="submit" name="Vote">
+				{% endfor %} 
+				<input type="submit" name="Vote"></form>
+			{%endfor%}
+			
 	</body>
 </html>

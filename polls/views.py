@@ -121,3 +121,18 @@ class QuestionnaireDetailView(generic.DetailView):
 	"""docstring for DetailView"""
 	model = Questionnaire
 	template_name = 'polls/questiondetail.html'
+
+
+def questionnairevote(request, questionnaire_id):
+	questionnaire = get_object_or_404(Questionnaire,pk=questionnaire_id)
+	#print questionnaire.id
+	for question in questionnaire.members.all():
+		try:
+			selected_choice = question.choice_set.get(pk=request.POST.get('choice'))
+			print str(request.POST.get('choice'))
+		except (KeyError,Choice.DoesNotExist):
+			return render(request, "polls/questiondetail.html", {'questionnaire': questionnaire,'error_message':"you did't select a choice."})
+		else:
+			selected_choice.votes += 1
+			selected_choice.save()
+	return HttpResponseRedirect(reverse('polls:index',args=()))

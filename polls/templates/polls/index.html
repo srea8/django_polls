@@ -19,6 +19,7 @@
 		<h1> 问卷调查 </h1>
 		<a href="{% url 'polls:newquestion'%}">新建问题</a>
 		<a href="{% url 'polls:index'%}">管理问题</a>
+		<a href="{% url 'polls:listquestionnaire'%}">问卷列表</a>
 		{% if latest_question_list %}
 		    <ul >
 		    {% for question in latest_question_list %}
@@ -27,7 +28,7 @@
 		    	<a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></ol>
 				<ol type="A" style="padding-left : 30px">
 					{% for choice in question.choice_set.all%}
-						<li><label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br/></li>
+						<li><label for="choice{{forloop.counter}}">{{choice.choice_text}}........{{choice.votes}}</label><br/></li>
 					{% endfor %}
 				</ol>
 		    {% endfor %}

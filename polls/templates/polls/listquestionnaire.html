@@ -11,7 +11,7 @@
 		{% if questionnaire_list %}
 		    <ul >
 		    {% for questionnaire in questionnaire_list %}
-		    	{{questionnaire.id}}.{{questionnaire}}
+		    	<a href="{% url 'polls:questiondetail' questionnaire.id %}">{{questionnaire.id}}.{{questionnaire}}</a></ol>
 <!-- 			{%for quuq in questionnaire.members.all%}  
 		    	{{quuq}}
 		    	{%endfor%} -->
