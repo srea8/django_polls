@@ -42,7 +42,7 @@ class Indexview(generic.ListView):
 	template_name = 'polls/index.html'
 	context_object_name = 'latest_question_list'
 	def get_queryset(self):
-		return Question.objects.all()[:5]
+		return Question.objects.all()
 		
 
 class DetailView(generic.DetailView):
